@@ -21,20 +21,45 @@
             font-size: 32px;
             text-shadow: 0px 2px 4px black;
         }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-top: 25px;
+        }
+        button {
+            box-shadow: 0px 2px 4px black;
+            cursor: pointer;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            padding: 15px;
+            border-radius: 10px;
+            background-color: lightseagreen;
+            color: white;
+            text-transform: uppercase;
+            border-style: none;
+        }
     </style>
     <h1 id="risultato"></h1>
+    <div class="container">
+        <button id="aggiorna">
+            Aggiorna 
+        </button>
+    </div>
     
     
     <script>
+
+
         let risultato = 0;
         let data = new Date();
-        
+        let ore = 24 - data.getHours();
+        let minuti = 60 - data.getMinutes();
+        let secondi = 60 - data.getSeconds();
         let ottobreNo = [1, 2, 29, 30, 8, 9, 15, 16, 22, 23, 29, 30];
-        let novembreNo = [1, 5, 6, 12, 13, 19, 20, 26, 27];
-        let dicembreNo = [3, 4, 8, 10, 11, 17, 18, 24, 25, 26, 30, 31];
-        
         let ottobre = 31;
+        let novembreNo = [1, 5, 6, 12, 13, 19, 20, 26, 27];
         let novembre = 30;
+        let dicembreNo = [3, 4, 8, 10, 11, 17, 18, 24, 25, 26, 30, 31];
         let dicembre = 31;
         
         let giorno = data.getDate(); // 28
@@ -84,13 +109,31 @@
         }
         risultato = risultato + 1;
         
+        let oreString = "ore";
+        let minutiString = "minuti";
+        let secondiString = "secondi";
+        if (ore == 1) {
+            oreString = "ora";
+        }
+        if (minuti == 1) {
+            minutiString = "minuto";
+        }
+        if (secondi == 1) {
+            secondiString = "secondo";
+        }
+
         if (risultato == 1) {
-            risultatoDom.innerHTML = `Domani sarai in pensione!`;
+            risultatoDom.innerHTML = `Domani, tra ${ore} ${oreString}, ${minuti} ${minutiString} e ${secondi} ${secondiString} sarai in pensione!`;
         } else if (risultato == 0) {
             risultatoDom.innerHTML = "Complimenti! Sei in pensione!";
         } else {
-            risultatoDom.innerHTML = `Ti mancano ${risultato} giorni per andare in Pensione!`;
+            risultatoDom.innerHTML = `Ti mancano ${risultato} giorni, ${ore} ${oreString}, ${minuti} ${minutiString} e ${secondi} ${secondiString} per andare in Pensione!`;
         }
+
+        let aggiornaDom = document.getElementById("aggiorna");
+        aggiornaDom.addEventListener("click", function() {
+            location.reload();
+        })
 
     </script>
 </body>
