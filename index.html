@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pensione</title>
+</head>
+<body>
+    <style>
+        body {
+            background-image: url('./img.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            height: 95vh;
+        }
+        h1 {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            color: white;
+            font-size: 32px;
+            text-shadow: 0px 2px 4px black;
+        }
+    </style>
+    <h1 id="risultato"></h1>
+    
+    
+    <script>
+        let risultato = 0;
+        let data = new Date();
+        
+        let ottobreNo = [1, 2, 29, 30, 8, 9, 15, 16, 22, 23, 29, 30];
+        let novembreNo = [1, 5, 6, 12, 13, 19, 20, 26, 27];
+        let dicembreNo = [3, 4, 8, 10, 11, 17, 18, 24, 25, 26, 30, 31];
+        
+        let ottobre = 31;
+        let novembre = 30;
+        let dicembre = 31;
+        
+        let giorno = data.getDate(); // 28
+        let mese = data.getMonth(); // 9
+        let risultatoDom = document.getElementById("risultato");
+        
+        if (mese == 9) {
+            
+            let aggiungere = 0;
+            let i = 1;
+            while (i <= ottobre) {
+                if (i > giorno && !ottobreNo.includes(i)) {
+                    aggiungere = aggiungere + 1;
+                }
+                i++;
+            }
+            
+            risultato = (novembre - novembreNo.length) + (dicembre - dicembreNo.length) + aggiungere;
+        }
+        
+        if (mese == 10) {
+            
+            let aggiungere = 0;
+            let i = 1;
+            while (i <= novembre) {
+                if (i > giorno && !novembreNo.includes(i)) {
+                    aggiungere = aggiungere + 1;
+                }
+                i++;
+            }
+            
+            risultato = (dicembre - dicembreNo.length) + aggiungere;
+        }
+        
+        if (mese == 11) {
+            
+            let aggiungere = 0;
+            let i = 1;
+            while (i <= dicembre) {
+                if (i > giorno && !dicembreNo.includes(i)) {
+                    aggiungere = aggiungere + 1;
+                }
+                i++;
+            }
+            
+            risultato = aggiungere;
+        }
+        risultato = risultato + 1;
+        
+        if (risultato == 1) {
+            risultatoDom.innerHTML = `Domani sarai in pensione!`;
+        } else if (risultato == 0) {
+            risultatoDom.innerHTML = "Complimenti! Sei in pensione!";
+        } else {
+            risultatoDom.innerHTML = `Ti mancano ${risultato} giorni per andare in Pensione!`;
+        }
+
+    </script>
+</body>
+</html>
